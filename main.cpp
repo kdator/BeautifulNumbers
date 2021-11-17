@@ -16,35 +16,17 @@ using std::endl;
 using std::make_unique;
 
 int main() {
-  int base, numberOfDigits;
+  const int base = 13;
+  const int numberOfDigits = 13;
 
-  cout << "Enter the base of number system: ";
-  cin >> base;
-  if (cin.fail()) {
-    cout << "\nBad parameter.";
-    cin.ignore();
-    cin.fail();
-    return 0;
-  }
-  cout << "\nEnter the number of digits in the number: ";
-  cin >> numberOfDigits;
-  if (cin.fail()) {
-    cout << "\nBad parameter.";
-    cin.ignore();
-    cin.fail();
-    return 0;
-  }
-
-  unique_ptr<IBeautifulNumbers> pt = make_unique<BeautifulNumbers>();
+  unique_ptr<IBeautifulNumbers> pt = make_unique<BeautifulNumbers>(base, numberOfDigits);
   string res;
   if (pt) {
-    pt.get()->Calculate(base, numberOfDigits);
+    pt.get()->Calculate();
     res = pt.get()->GetResult();
   }
 
-  cout << "\nCount of beautiful numbers: " << res << endl;
-  cin.ignore(numeric_limits<streamsize>::max(), '\n');
-  cin.clear();
+  cout << "Count of beautiful numbers: " << res << endl;
   cin.get();
   return 0; 
 }
