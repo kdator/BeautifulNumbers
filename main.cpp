@@ -1,11 +1,14 @@
 #include <iostream>
 #include <memory>
 #include <cstring>
+#include <limits>
 
 #include "BeautifulNumbers.h"
 
 using std::unique_ptr;
 using std::string;
+using std::numeric_limits;
+using std::streamsize;
 
 using std::cout;
 using std::endl;
@@ -36,5 +39,8 @@ int main() {
     res = pt.get()->Calculate(base, half);
 
   cout << "\nCount of beautiful numbers: " << res << endl;
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  cin.clear();
+  cin.get();
   return 0; 
 }
