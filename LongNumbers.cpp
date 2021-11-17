@@ -82,7 +82,7 @@ LongNumber LongNumber::Pow(int n) const {
 
 LongNumber LongNumber::Sqrt(int n) const {
   if (n < 2)
-    throw string("powe() - a power must be more or equal than 2");
+    throw string("power() - a power must be more or equal than 2");
   if (isNegative_ && ((n & 1) == 0))
     throw string("sqrt() -  value_ must be positive");
 
