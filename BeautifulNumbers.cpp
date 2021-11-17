@@ -5,25 +5,28 @@
 
 using std::string;
 
-LongNumber BeautifulNumbers::numberOfCombinations(int n, int k) {
-  return LongNumber::Factorial(n) / (LongNumber::Factorial(n - k) * LongNumber::Factorial(k));
-}
+BeautifulNumbers::BeautifulNumbers(int base, int numberOfDigits) 
+  : base_(base), numberOfDigits_(numberOfDigits) {}
 
-void BeautifulNumbers::Calculate(int base, int numberOfDigits) {
+void BeautifulNumbers::Calculate() {
   LongNumber res;
   LongNumber minusOne(-1);
-  int half = numberOfDigits / 2;
-  bool isOdd = numberOfDigits % 2;
-  if (base < 1 || numberOfDigits <= 1) {
+  int half = numberOfDigits_ / 2;
+  bool isOdd = numberOfDigits_ % 2;
+  if (base_ < 1 || numberOfDigits_ <= 1) {
     res = LongNumber(0);
     return;
   }
-  for (int i = 0; i <= (base - 1) * half / base; i++)
+  for (int i = 0; i <= (base_ - 1) * half / base_; i++)
     res += minusOne.Pow(i) * numberOfCombinations(2 * half, i) 
-           * numberOfCombinations((base - 1) * half + 2 * half - 1 - base * i, 2 * half - 1);
+           * numberOfCombinations((base_ - 1) * half + 2 * half - 1 - base_ * i, 2 * half - 1);
   if (isOdd)
-    res *= base;
+    res *= base_;
   res_ = res.GetValue();
 }
 
 string BeautifulNumbers::GetResult() { return res_.GetValue(); }
+
+LongNumber BeautifulNumbers::numberOfCombinations(int n, int k) {
+  return LongNumber::Factorial(n) / (LongNumber::Factorial(n - k) * LongNumber::Factorial(k));
+}

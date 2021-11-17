@@ -16,14 +16,7 @@
  */
 class IBeautifulNumbers {
 public:
-  /**
-   * @brief Counts the number of beautiful numbers based on the number system and
-   *        the number of digits in the number.
-   * @param base the base of number sustem.
-   * @param numberOfDigits the number of digits in one number.
-   * @return count of numbers.
-   */
-  virtual void Calculate(int base, int numberOfDigits) = 0;
+  virtual void Calculate() = 0;
 
   virtual std::string GetResult() = 0;
 
@@ -33,6 +26,8 @@ public:
 class BeautifulNumbers : public IBeautifulNumbers {
 private:
   LongNumber res_;
+  int base_;
+  int numberOfDigits_;
 
   /**
    * Calculate number of combinations. See more https://en.wikipedia.org/wiki/Combination
@@ -40,16 +35,19 @@ private:
   LongNumber numberOfCombinations(int n, int k);
 
 public:
+  explicit BeautifulNumbers(int base, int numberOfDigits);
+
+  ~BeautifulNumbers() = default;
+
   /**
    * @brief Counts the number of beautiful numbers based on the number system and
    *        the number of digits in the number.
-   * @param base the base of number sustem.
-   * @param numberOfDigits the number of digits in one number.
-   * @return count of numbers.
    */
-  void Calculate(int base, int numberOfDigits) override;
+  void Calculate() override;
 
+  /**
+   * Get the result of calculations.
+   * @return the result.
+   */
   std::string GetResult() override;
-
-  ~BeautifulNumbers() = default;
 };
